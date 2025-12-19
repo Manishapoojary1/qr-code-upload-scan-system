@@ -1,29 +1,27 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
   const register = async () => {
     try {
       setError("");
-      setMessage("");
 
-      await axios.post("http://localhost:5000/api/auth/register", {
-        name,
+      const res = await api.post("/auth/login", {
         email,
         password
       });
 
-      setMessage("Registration successful. Please login.");
-      setTimeout(() => navigate("/"), 1500);
+      localStorage.setItem("token", res.data.token);
+      navigate("/upload");
+
     } catch (err) {
       setError("Registration failed");
     }
@@ -36,7 +34,6 @@ function Register() {
         <p className="auth-subtitle">Register to start scanning QR codes</p>
 
         {error && <div className="auth-error">{error}</div>}
-        {message && <div className="auth-success">{message}</div>}
 
         <input
           type="text"
