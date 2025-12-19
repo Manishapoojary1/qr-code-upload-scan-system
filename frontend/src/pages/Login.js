@@ -19,17 +19,19 @@ function Login() {
 
       localStorage.setItem("token", res.data.token);
       navigate("/upload");
+
     } catch (err) {
-      setError("Invalid credentials");
+      console.error("LOGIN ERROR:", err.response?.data || err.message);
+      setError("Login failed");
     }
   };
 
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
-        <h2 className="auth-title">Login</h2>
+        <h2>Login</h2>
 
-        {error && <p className="auth-error">{error}</p>}
+        {error && <div className="auth-error">{error}</div>}
 
         <input
           type="email"
