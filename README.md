@@ -100,10 +100,10 @@ qr-code-upload-scan-system/
 ## 🚀 Deployment
 
 ### Backend (Render)
-🔗 https://qr-backend-nvaj.onrender.com
+🔗 [Backend Live URL](https://qr-backend-nvaj.onrender.com)
 
 ### Frontend (Render)
-🔗 https://qr-frontend-bnxv.onrender.com
+🔗 [Frontend Live URL](https://qr-frontend-bnxv.onrender.com)
 
 ---
 
@@ -133,3 +133,4 @@ qr-code-upload-scan-system/
 -POST /api/auth/login – Login user
 -POST /api/scan/upload – Upload & scan QR code
 -GET /api/scan/history – View scan history for logged-in user
+
