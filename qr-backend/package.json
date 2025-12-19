@@ -24,4 +24,8 @@
     "qrcode-reader": "^1.0.4",
     "react-router-dom": "^7.11.0"
   }
+  "engines": {
+      "node": "18.x"
+    }
+
 }
