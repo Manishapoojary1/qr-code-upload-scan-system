@@ -18,6 +18,8 @@ function UploadQR() {
       }
 
       const formData = new FormData();
+
+
       formData.append("qrImage", file);
 
       const res = await api.post("/scan/upload", formData, {
@@ -27,6 +29,7 @@ function UploadQR() {
       });
 
       setResult(res.data.qrValue);
+
     } catch (err) {
       console.error(err.response?.data || err.message);
       setError("QR scanning failed");
@@ -38,35 +41,21 @@ function UploadQR() {
       <Navbar />
 
       <div className="upload-page">
-        <h1 className="upload-title">Scan QR Code</h1>
-        <p className="upload-subtitle">
-          Upload a QR code image to extract its data instantly
-        </p>
+        <h1>Scan QR Code</h1>
 
         {error && <div className="upload-error">{error}</div>}
 
-        <div className="upload-area">
-          <input
-            type="file"
-            id="qrUpload"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
 
-          <label htmlFor="qrUpload" className="upload-label">
-            {file ? file.name : "Click to choose QR image"}
-          </label>
-
-          <button className="upload-btn" onClick={upload}>
-            Scan QR
-          </button>
-        </div>
+        <button onClick={upload}>Scan QR</button>
 
         {result && (
-          <div className="upload-result">
-            <span>QR Result</span>
-            <a href={result} target="_blank" rel="noreferrer">
-              {result}
-            </a>
+          <div>
+            <strong>Result:</strong> {result}
           </div>
         )}
       </div>
