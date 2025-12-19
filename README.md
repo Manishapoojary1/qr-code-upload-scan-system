@@ -114,9 +114,17 @@ cd frontend
 npm install
 npm start
 
-📷 Screenshots
-Screenshots of:
-Login Page
-QR Upload & Scan Result Page
-Scan History Page
+## 📷 Screenshots
+
+### Login Page
+![Login Page](login.jpeg)
+
+### QR Upload & Scan Result
+![Scan Page](scan.jpeg)
+![Scan Page](scanned_result.jpeg)
+
+### Scan History
+![History Page](history.jpeg)
+
+
 
