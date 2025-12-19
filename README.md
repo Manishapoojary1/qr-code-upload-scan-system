@@ -70,24 +70,30 @@ The project demonstrates QR image processing, authentication, frontend–backend
 
 ---
 
-## 🗂 Folder Structure
+## 📁 Folder Structure
+
+```text
 qr-code-upload-scan-system/
-│
 ├── frontend/
-│ ├── src/
-│ │ ├── pages/
-│ │ ├── components/
-│ │ ├── services/
-│ │ └── App.js
+│   └── src/
+│       ├── pages/
+│       ├── components/
+│       ├── services/
+│       └── App.js
 │
 ├── qr-backend/
-│ ├── routes/
-│ ├── models/
-│ ├── middleware/
-│ └── server.js
+│   ├── routes/
+│   ├── models/
+│   ├── middleware/
+│   └── server.js
+│
+├── screenshots/
+│   ├── login.jpeg
+│   ├── scan.jpeg
+│   ├── scanned_result.jpeg
+│   └── history.jpeg
 │
 └── README.md
-
 
 ---
 
@@ -105,32 +111,25 @@ qr-code-upload-scan-system/
 
 ### Backend
 ```bash
-cd qr-backend
-npm install
-npm start
-
+-cd qr-backend
+-npm install
+-npm start
 
 ### Frontend
-cd frontend
-npm install
-npm start
+```bash
+-cd frontend
+-npm install
+-npm start
 
-
+---
 📸 Screenshots
-Login Page
-QR Upload & Scan
-QR Scan Result
-Scan History
+-Login Page
+-QR Upload & Scan
+-QR Scan Result
+-Scan History
 
-🧪 API Endpoints
-
-POST /api/auth/register – Register user
-POST /api/auth/login – Login user
-POST /api/scan/upload – Upload & scan QR code
-GET /api/scan/history – View scan history for logged-in user
-
-
-
-
-
-
+🔌 API Endpoints
+-POST /api/auth/register – Register user
+-POST /api/auth/login – Login user
+-POST /api/scan/upload – Upload & scan QR code
+-GET /api/scan/history – View scan history for logged-in user
