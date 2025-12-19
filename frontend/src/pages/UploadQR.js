@@ -24,14 +24,15 @@ function UploadQR() {
       formData.append("qrImage", file);
 
       const res = await axios.post(
-        "http://localhost:5000/api/scan/upload",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
+          "https://qr-backend-nvaj.onrender.com/api/scan/upload",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
           }
-        }
-      );
+        );
+
 
       setResult(res.data.qrValue);
     } catch (err) {
