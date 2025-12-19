@@ -1,6 +1,9 @@
+import axios from "axios";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
-import api from "../services/api";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function UploadQR() {
   const [file, setFile] = useState(null);
@@ -8,62 +11,76 @@ function UploadQR() {
   const [error, setError] = useState("");
 
   const upload = async () => {
-    setError("");
-    setResult("");
-  
-    if (!file) {
-      setError("Please select a QR image");
-      return;
-    }
-  
     try {
+      setError("");
+      setResult("");
+
+      if (!file) {
+        setError("Please select a QR image");
+        return;
+      }
+
       const formData = new FormData();
       formData.append("qrImage", file);
-  
-      const res = await api.post("/scan/upload", formData, {
-        headers: {
-          Authorization: localStorage.getItem("token")
+
+      const res = await axios.post(
+        "http://localhost:5000/api/scan/upload",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
         }
-      });
-  
-      setResult(res.data.qrValue);   
-      setError("");                 
-  
+      );
+
+      setResult(res.data.qrValue);
     } catch (err) {
       console.error(err);
-      setResult("");
       setError("QR scanning failed");
     }
   };
 
+
   return (
-    <>
-      <Navbar />
+  <>
+    <Navbar />
 
-      <div className="upload-page">
-        <h1>Scan QR Code</h1>
+    <div className="upload-page">
+      <h1 className="upload-title">Scan QR Code</h1>
+      <p className="upload-subtitle">
+        Upload a QR code image to extract its data instantly
+      </p>
 
-        {error && !result && (
-          <div className="upload-error">{error}</div>
-        )}
+      {error && <div className="upload-error">{error}</div>}
 
-
+      <div className="upload-area">
         <input
           type="file"
-          accept="image/*"
+          id="qrUpload"
           onChange={(e) => setFile(e.target.files[0])}
         />
 
-        <button onClick={upload}>Scan QR</button>
+        <label htmlFor="qrUpload" className="upload-label">
+          {file ? file.name : "Click to choose QR image"}
+        </label>
 
-        {result && (
-          <div>
-            <strong>Result:</strong> {result}
-          </div>
-        )}
+        <button className="upload-btn" onClick={upload}>
+          Scan QR
+        </button>
       </div>
-    </>
-  );
+
+      {result && (
+        <div className="upload-result">
+          <span>QR Result</span>
+          <a href={result} target="_blank" rel="noreferrer">
+            {result}
+          </a>
+        </div>
+      )}
+    </div>
+  </>
+);
+
 }
 
 export default UploadQR;
