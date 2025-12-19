@@ -52,6 +52,14 @@ The project demonstrates QR image processing, authentication, frontend–backend
 5. Scan result is stored with timestamp in database
 
 ---
+## 🚀 Deployment
+
+### Backend (Render)
+🔗 [Backend Live URL](https://qr-backend-nvaj.onrender.com)
+
+### Frontend (Render)
+🔗 [Frontend Live URL](https://qr-frontend-bnxv.onrender.com)
+---
 
 ## 🧰 Tech Stack
 
@@ -70,6 +78,7 @@ The project demonstrates QR image processing, authentication, frontend–backend
 
 ---
 
+```md
 ## 📁 Folder Structure
 
 ```text
@@ -95,15 +104,6 @@ qr-code-upload-scan-system/
 │
 └── README.md
 
----
-
-## 🚀 Deployment
-
-### Backend (Render)
-🔗 [Backend Live URL](https://qr-backend-nvaj.onrender.com)
-
-### Frontend (Render)
-🔗 [Frontend Live URL](https://qr-frontend-bnxv.onrender.com)
 
 ---
 
@@ -133,4 +133,5 @@ qr-code-upload-scan-system/
 -POST /api/auth/login – Login user
 -POST /api/scan/upload – Upload & scan QR code
 -GET /api/scan/history – View scan history for logged-in user
+
 
