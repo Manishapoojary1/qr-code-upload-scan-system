@@ -1,7 +1,8 @@
 const express = require("express");
 const multer = require("multer");
-const Jimp = require("jimp");
-const QrCode = require("qrcode-reader");
+const fs = require("fs");
+const { createCanvas, loadImage } = require("canvas");
+const jsQR = require("jsqr");
 const Scan = require("../models/Scan");
 const auth = require("../middleware/auth");
 
@@ -9,40 +10,35 @@ const router = express.Router();
 
 const upload = multer({ dest: "uploads/" });
 
-router.post(
-  "/upload",
-  auth,
-  upload.single("qrImage"),   // <-- THIS KEY NAME IS IMPORTANT
-  async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ message: "No file uploaded" });
-      }
+router.post("/upload", auth, upload.single("qrImage"), async (req, res) => {
+  try {
+    const image = await loadImage(req.file.path);
+    const canvas = createCanvas(image.width, image.height);
+    const ctx = canvas.getContext("2d");
 
-      const image = await Jimp.read(req.file.path);
-      const qr = new QrCode();
+    ctx.drawImage(image, 0, 0);
+    const imageData = ctx.getImageData(0, 0, image.width, image.height);
 
-      qr.callback = async (err, value) => {
-        if (err || !value) {
-          return res.status(400).json({ message: "QR not detected" });
-        }
+    const qrCode = jsQR(imageData.data, image.width, image.height);
 
-        const scan = await Scan.create({
-          userId: req.userId,
-          qrValue: value.result
-        });
+    fs.unlinkSync(req.file.path);
 
-        res.json({ qrValue: scan.qrValue });
-      };
-
-      qr.decode(image.bitmap);
-
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "QR scanning failed" });
+    if (!qrCode) {
+      return res.status(400).json({ message: "QR not detected" });
     }
+
+    const scan = await Scan.create({
+      userId: req.userId,
+      qrValue: qrCode.data
+    });
+
+    res.json({ qrValue: scan.qrValue });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "QR scanning failed" });
   }
-);
+});
 
 router.get("/history", auth, async (req, res) => {
   const scans = await Scan.find({ userId: req.userId })
