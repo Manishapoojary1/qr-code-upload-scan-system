@@ -71,3 +71,52 @@ The project demonstrates QR image processing, authentication, frontend–backend
 ---
 
 ## 🗂 Folder Structure
+qr-code-upload-scan-system/
+│
+├── frontend/
+│ ├── src/
+│ │ ├── pages/
+│ │ ├── components/
+│ │ ├── services/
+│ │ └── App.js
+│
+├── qr-backend/
+│ ├── routes/
+│ ├── models/
+│ ├── middleware/
+│ └── server.js
+│
+└── README.md
+
+
+---
+
+## 🚀 Deployment
+
+### Backend (Render)
+🔗 https://qr-backend-nvaj.onrender.com
+
+### Frontend (Render)
+🔗 **(Add your frontend Render URL here)**
+
+---
+
+## ⚙️ How to Run Locally
+
+### Backend
+```bash
+cd qr-backend
+npm install
+npm start
+---
+###frontend
+cd frontend
+npm install
+npm start
+
+📷 Screenshots
+Screenshots of:
+Login Page
+QR Upload & Scan Result Page
+Scan History Page
+
