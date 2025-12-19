@@ -12,17 +12,18 @@ function Register() {
     try {
       setError("");
 
-      const res = await api.post("/auth/login", {
+      // 🔥 FIX: call /register instead of /login
+      await api.post("/auth/register", {
         email,
         password
       });
 
-      localStorage.setItem("token", res.data.token);
-      navigate("/upload");
+      // After successful registration, redirect to login
+      navigate("/");
 
     } catch (err) {
       console.error("REGISTER ERROR:", err.response?.data || err.message);
-      setError("Registration failed");
+      setError(err.response?.data?.message || "Registration failed");
     }
   };
 
