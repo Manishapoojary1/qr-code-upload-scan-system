@@ -45,7 +45,10 @@ function UploadQR() {
       <div className="upload-page">
         <h1>Scan QR Code</h1>
 
-        {error && <div className="upload-error">{error}</div>}
+        {error && !result && (
+          <div className="upload-error">{error}</div>
+        )}
+
 
         <input
           type="file"
