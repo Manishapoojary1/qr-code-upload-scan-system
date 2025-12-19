@@ -97,7 +97,7 @@ qr-code-upload-scan-system/
 🔗 https://qr-backend-nvaj.onrender.com
 
 ### Frontend (Render)
-🔗 **(Add your frontend Render URL here)**
+🔗 https://qr-frontend-bnxv.onrender.com
 
 ---
 
@@ -128,6 +128,7 @@ POST /api/auth/register – Register user
 POST /api/auth/login – Login user
 POST /api/scan/upload – Upload & scan QR code
 GET /api/scan/history – View scan history for logged-in user
+
 
 
 
