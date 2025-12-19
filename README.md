@@ -108,23 +108,28 @@ qr-code-upload-scan-system/
 cd qr-backend
 npm install
 npm start
----
-###frontend
+
+
+### Frontend
 cd frontend
 npm install
 npm start
 
-## 📷 Screenshots
 
-### Login Page
-![Login Page](login.jpeg)
+📸 Screenshots
+Login Page
+QR Upload & Scan
+QR Scan Result
+Scan History
 
-### QR Upload & Scan Result
-![Scan Page](scan.jpeg)
-![Scan Page](scanned_result.jpeg)
+🧪 API Endpoints
 
-### Scan History
-![History Page](history.jpeg)
+POST /api/auth/register – Register user
+POST /api/auth/login – Login user
+POST /api/scan/upload – Upload & scan QR code
+GET /api/scan/history – View scan history for logged-in user
+
+
 
 
 
