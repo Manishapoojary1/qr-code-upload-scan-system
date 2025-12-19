@@ -9,32 +9,34 @@ function UploadQR() {
 
   const upload = async () => {
     try {
-      setError("");
-      setResult("");
-
+      setError("");      
+      setResult("");     
+  
       if (!file) {
         setError("Please select a QR image");
         return;
       }
-
+  
       const formData = new FormData();
-
-
       formData.append("qrImage", file);
-
+  
       const res = await api.post("/scan/upload", formData, {
         headers: {
           Authorization: localStorage.getItem("token")
         }
       });
-
+  
+      
+      setError("");
       setResult(res.data.qrValue);
-
+  
     } catch (err) {
       console.error(err.response?.data || err.message);
-      setError("QR scanning failed");
+      setResult("");                     
+      setError("QR scanning failed");    
     }
   };
+
 
   return (
     <>
