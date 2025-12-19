@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -14,11 +13,14 @@ function History() {
       return;
     }
 
-    axios.get("http://localhost:5000/api/scan/history", {
+    api.get("/scan/history", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
-    }).then(res => setScans(res.data));
+    })
+    .then(res => setScans(res.data))
+    .catch(err => console.error(err));
+
   }, [navigate]);
 
   return (
@@ -26,6 +28,9 @@ function History() {
       <Navbar />
       <div style={{ padding: "40px" }}>
         <h2>Scan History</h2>
+
+        {scans.length === 0 && <p>No scan history found</p>}
+
         <ul>
           {scans.map(scan => (
             <li key={scan._id}>
