@@ -8,15 +8,15 @@ function UploadQR() {
   const [error, setError] = useState("");
 
   const upload = async () => {
+    setError("");
+    setResult("");
+  
+    if (!file) {
+      setError("Please select a QR image");
+      return;
+    }
+  
     try {
-      setError("");      
-      setResult("");     
-  
-      if (!file) {
-        setError("Please select a QR image");
-        return;
-      }
-  
       const formData = new FormData();
       formData.append("qrImage", file);
   
@@ -26,17 +26,15 @@ function UploadQR() {
         }
       });
   
-      
-      setError("");
-      setResult(res.data.qrValue);
+      setResult(res.data.qrValue);   
+      setError("");                 
   
     } catch (err) {
-      console.error(err.response?.data || err.message);
-      setResult("");                     
-      setError("QR scanning failed");    
+      console.error(err);
+      setResult("");
+      setError("QR scanning failed");
     }
   };
-
 
   return (
     <>
